@@ -43,7 +43,7 @@ afterEvaluate {
             create<MavenPublication>("release") {
                 from(components["release"])
                 groupId = "br.com.agatha.monfredini"
-                artifactId = "studioghibliapi"
+                artifactId = "studio-ghibli-api"
                 version = "1.0.0"
             }
         }
