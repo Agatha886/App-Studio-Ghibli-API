@@ -1,10 +1,10 @@
-package br.com.agatha.monfredini.studioghibli.viewmodel
+package br.com.agatha.monfredini.studio_ghibli_api.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import br.com.agatha.monfredini.studioghibli.repository.ListaPersonagensRepository
-import br.com.agatha.monfredini.studioghibli.ui.model.Filme
-import br.com.agatha.monfredini.studioghibli.ui.model.Personagem
+import br.com.agatha.monfredini.studio_ghibli_api.repository.ListaPersonagensRepository
+import br.com.agatha.monfredini.studio_ghibli_api.ui.model.Filme
+import br.com.agatha.monfredini.studio_ghibli_api.ui.model.Personagem
 
 class ListaPersonagensViewModel(private val repository: ListaPersonagensRepository): ViewModel() {
 
@@ -33,8 +33,5 @@ class ListaPersonagensViewModel(private val repository: ListaPersonagensReposito
                 }
             }
         }
-//        val listaDePersonagens: List<Personagem> = personagens
-//        Log.i("FORA DO FOR", "FORA: ${listaDePersonagens}")
-//        listaPersonagens.value = listaDePersonagens
     }
 }

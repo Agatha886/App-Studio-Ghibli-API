@@ -1,8 +1,8 @@
-package br.com.agatha.monfredini.studioghibli.repository
+package br.com.agatha.monfredini.studio_ghibli_api.repository
 
 import android.util.Log
-import br.com.agatha.monfredini.studioghibli.retrofit.service.FilmesRetrofit
-import br.com.agatha.monfredini.studioghibli.ui.model.Personagem
+import br.com.agatha.monfredini.studio_ghibli_api.retrofit.service.FilmesRetrofit
+import br.com.agatha.monfredini.studio_ghibli_api.ui.model.Personagem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main

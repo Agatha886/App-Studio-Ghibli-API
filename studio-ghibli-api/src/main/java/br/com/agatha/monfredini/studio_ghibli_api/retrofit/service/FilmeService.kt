@@ -1,7 +1,7 @@
-package br.com.agatha.monfredini.studioghibli.retrofit.service
+package br.com.agatha.monfredini.studio_ghibli_api.retrofit.service
 
-import br.com.agatha.monfredini.studioghibli.ui.model.Filme
-import br.com.agatha.monfredini.studioghibli.ui.model.Personagem
+import br.com.agatha.monfredini.studio_ghibli_api.ui.model.Filme
+import br.com.agatha.monfredini.studio_ghibli_api.ui.model.Personagem
 import retrofit2.http.GET
 import retrofit2.http.Path
 

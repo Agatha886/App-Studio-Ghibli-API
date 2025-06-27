@@ -1,9 +1,9 @@
-package br.com.agatha.monfredini.studioghibli.di.modules
+package br.com.agatha.monfredini.studio_ghibli_api.di.modules
 
-import br.com.agatha.monfredini.studioghibli.repository.ListaFilmesRepository
-import br.com.agatha.monfredini.studioghibli.repository.ListaPersonagensRepository
-import br.com.agatha.monfredini.studioghibli.viewmodel.ListaFilmesViewModel
-import br.com.agatha.monfredini.studioghibli.viewmodel.ListaPersonagensViewModel
+import br.com.agatha.monfredini.studio_ghibli_api.repository.ListaFilmesRepository
+import br.com.agatha.monfredini.studio_ghibli_api.repository.ListaPersonagensRepository
+import br.com.agatha.monfredini.studio_ghibli_api.viewmodel.ListaFilmesViewModel
+import br.com.agatha.monfredini.studio_ghibli_api.viewmodel.ListaPersonagensViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
