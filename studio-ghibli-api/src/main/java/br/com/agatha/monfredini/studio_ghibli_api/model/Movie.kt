@@ -2,7 +2,7 @@ package br.com.agatha.monfredini.studio_ghibli_api.model
 
 import java.io.Serializable
 
-class Movie(
+data class Movie(
     val title: String,
     val description: String,
     val release_date: String,
