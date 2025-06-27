@@ -1,14 +1,12 @@
-package br.com.agatha.monfredini.studio_ghibli_api.ui.model
+package br.com.agatha.monfredini.studio_ghibli_api.model
 
 import java.io.Serializable
 
-class Filme(
+class Movie(
     val title: String,
     val description: String,
     val release_date: String,
     var poster: Int,
     val people: List<String>,
-    var listaPersonagens: MutableList<Personagem> = mutableListOf()
-):Serializable{
-
-}
+    var listaPersonagens: MutableList<GhibliCharacter> = mutableListOf()
+):Serializable

@@ -1,8 +1,8 @@
-package br.com.agatha.monfredini.studio_ghibli_api.ui.model
+package br.com.agatha.monfredini.studio_ghibli_api.model
 
 import java.io.Serializable
 
-class Personagem(
+class GhibliCharacter(
     val name: String,
     val gender: String,
     val age: String,

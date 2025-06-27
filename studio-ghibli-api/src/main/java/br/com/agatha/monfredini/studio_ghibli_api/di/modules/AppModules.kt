@@ -1,27 +1,27 @@
 package br.com.agatha.monfredini.studio_ghibli_api.di.modules
 
-import br.com.agatha.monfredini.studio_ghibli_api.repository.ListaFilmesRepository
-import br.com.agatha.monfredini.studio_ghibli_api.repository.ListaPersonagensRepository
-import br.com.agatha.monfredini.studio_ghibli_api.viewmodel.ListaFilmesViewModel
-import br.com.agatha.monfredini.studio_ghibli_api.viewmodel.ListaPersonagensViewModel
+import br.com.agatha.monfredini.studio_ghibli_api.repository.MovieListRepository
+import br.com.agatha.monfredini.studio_ghibli_api.repository.CharacterListRepository
+import br.com.agatha.monfredini.studio_ghibli_api.viewmodel.MoviesListViewModel
+import br.com.agatha.monfredini.studio_ghibli_api.viewmodel.CharactersListViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 private const val BASE_URL = "https://ghibliapi.herokuapp.com/"
 
 val repository = module {
-    single<ListaFilmesRepository> {
-        ListaFilmesRepository()
+    single<MovieListRepository> {
+        MovieListRepository()
     }
 
-    single<ListaPersonagensRepository> { ListaPersonagensRepository() }
+    single<CharacterListRepository> { CharacterListRepository() }
 }
 
 val model = module {
-    viewModel<ListaFilmesViewModel> {
-        ListaFilmesViewModel(get())
+    viewModel<MoviesListViewModel> {
+        MoviesListViewModel(get())
     }
 
-    viewModel<ListaPersonagensViewModel> { ListaPersonagensViewModel(get()) }
+    viewModel<CharactersListViewModel> { CharactersListViewModel(get()) }
 }
 
