@@ -1,7 +1,7 @@
 package br.com.agatha.monfredini.studio_ghibli_api.di.modules
 
 import br.com.agatha.monfredini.studio_ghibli_api.repository.MovieListRepository
-import br.com.agatha.monfredini.studio_ghibli_api.repository.CharacterListRepository
+import br.com.agatha.monfredini.studio_ghibli_api.repository.CharactersListRepository
 import br.com.agatha.monfredini.studio_ghibli_api.viewmodel.MoviesListViewModel
 import br.com.agatha.monfredini.studio_ghibli_api.viewmodel.CharactersListViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -14,7 +14,7 @@ val repository = module {
         MovieListRepository()
     }
 
-    single<CharacterListRepository> { CharacterListRepository() }
+    single<CharactersListRepository> { CharactersListRepository() }
 }
 
 val model = module {
