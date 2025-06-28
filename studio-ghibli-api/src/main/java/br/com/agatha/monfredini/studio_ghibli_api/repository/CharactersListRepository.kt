@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Call
 
-internal class CharactersListRepository {
+class CharactersListRepository {
 
     var whenFailConnection: () -> Unit = {}
     var getCharacterSucess: (character: GhibliCharacter?) -> Unit = {}

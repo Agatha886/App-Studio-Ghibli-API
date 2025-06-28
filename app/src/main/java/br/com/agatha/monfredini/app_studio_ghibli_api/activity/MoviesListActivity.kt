@@ -6,11 +6,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.agatha.monfredini.app_studio_ghibli_api.adapter.MoviesAdapter
+import br.com.agatha.monfredini.studio_ghibli_api.viewmodel.MoviesListViewModel
 import br.com.agatha.monfredini.app_studio_ghibli_api.databinding.ActivityMovieListBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MoviesListActivity : AppCompatActivity() {
 
-    private val viewModel: ListaFilmesViewModel by viewModels()
+    private val viewModel: MoviesListViewModel by viewModel()
     private lateinit var adapter: MoviesAdapter
     private lateinit var binding: ActivityMovieListBinding
 
@@ -28,18 +30,16 @@ class MoviesListActivity : AppCompatActivity() {
         binding.recyclerFilmes.layoutManager = LinearLayoutManager(this)
         binding.recyclerFilmes.adapter = adapter
 
-        binding.btnPreencherLista.setOnClickListener {
-            viewModel.carregarFilmes()
+        viewModel.whenFail = {
+            Toast.makeText(this, "Erro ao carregar filmes", Toast.LENGTH_SHORT).show()
         }
 
-        viewModel.listaFilmes.observe(this) { filmes ->
+        viewModel.movies.observe(this) { filmes ->
             adapter.submitList(filmes)
         }
 
-        viewModel.erro.observe(this) { erro ->
-            erro?.let {
-                Toast.makeText(this, "Erro ao carregar filmes", Toast.LENGTH_SHORT).show()
-            }
+        binding.btnPreencherLista.setOnClickListener {
+            viewModel.getMovies()
         }
     }
 }

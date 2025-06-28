@@ -1,16 +1,19 @@
 package br.com.agatha.monfredini.studio_ghibli_api.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import br.com.agatha.monfredini.studio_ghibli_api.model.GhibliCharacter
 import br.com.agatha.monfredini.studio_ghibli_api.repository.CharactersListRepository
 import br.com.agatha.monfredini.studio_ghibli_api.model.Movie
 
-internal class CharactersListViewModel(private val repository: CharactersListRepository): ViewModel() {
+class CharactersListViewModel(private val repository: CharactersListRepository): ViewModel() {
 
-    private var whenFail: () -> Unit = {}
-    private val characterList = MutableLiveData<List<GhibliCharacter>>()
-    private val character = MutableLiveData<GhibliCharacter>()
+    var whenFail: () -> Unit = {}
+    private val _characterList = MutableLiveData<List<GhibliCharacter>>()
+    private val _character = MutableLiveData<GhibliCharacter>()
+    val character: LiveData<GhibliCharacter> = _character
+    val characterList: LiveData<List<GhibliCharacter>> = _characterList
 
     private fun getCharacterById(id: String) {
         repository.whenFailConnection = whenFail
@@ -28,8 +31,8 @@ internal class CharactersListViewModel(private val repository: CharactersListRep
                 if (it != null) {
                     val foundCharacter = it
                     characters.add(foundCharacter)
-                    characterList.value = characters
-                    character.value = it
+                    _characterList.value = characters
+                    _character.value = it
                 }
             }
         }
