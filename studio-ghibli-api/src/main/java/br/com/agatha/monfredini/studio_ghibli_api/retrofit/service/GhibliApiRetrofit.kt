@@ -33,5 +33,9 @@ class GhibliApiRetrofit {
     fun returnGhibliPeople(): Call<List<GhibliCharacter>> {
         return service.searchGhibliPeople()
     }
+
+    fun returnGhibliSpecies(): Call<List<Species>> {
+        return service.searchGhibliSpecies()
+    }
     
 }

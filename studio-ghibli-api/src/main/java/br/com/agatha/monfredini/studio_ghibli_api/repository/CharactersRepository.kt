@@ -59,7 +59,7 @@ class CharactersRepository {
             val characterId = id.replace("$BASE_URL/people/", "")
 
             if (characterId.isNotBlank()) {
-                val character = getCharacterById(characterId, whenFailConnection)
+                val character = getPeopleById(characterId, whenFailConnection)
 
                 character?.let {
                     characters.add(character)
@@ -72,11 +72,11 @@ class CharactersRepository {
         }
     }
 
-    fun getCharacterById(
+    private fun getPeopleById(
         id: String,
         whenFailConnection: () -> Unit,
     ): GhibliCharacter? {
-        val call = createSearchCharacterById(id)
+        val call = createSearchPeopleById(id)
         return try {
             val characterBody: GhibliCharacter? = call.execute().body()
             return characterBody
@@ -87,20 +87,35 @@ class CharactersRepository {
         }
     }
 
-    fun getGhibliPeople(
+    fun getGhibliCharacters(
         viewModelScope: CoroutineScope,
         whenFailConnection: () -> Unit,
         getGhibliPeople: (people: List<GhibliCharacter>) -> Unit
     ) {
         CoroutineScope(IO).launch {
-            val call = createSearchGhibliPeople()
+            val callPeople = createSearchGhibliPeople()
+            val callSpecies = createSearchGhibliSpecies()
             try {
-                val people: List<GhibliCharacter>? = call.execute().body()
+                val mutableListOf = mutableListOf<GhibliCharacter>()
+                val people: List<GhibliCharacter>? = callPeople.execute().body()
+                val species = callSpecies.execute().body()
                 people?.let {
-                    viewModelScope.launch {
-                        getGhibliPeople(it)
+                    mutableListOf.addAll(people)
+                }
+
+                species?.forEach { specie ->
+                    specie.people.forEach { id ->
+                        val character = getPeopleById(id, whenFailConnection)
+                        if (!mutableListOf.contains(character) && character != null) {
+                            mutableListOf.add(character)
+                        }
                     }
                 }
+
+                viewModelScope.launch {
+                    getGhibliPeople(mutableListOf)
+                }
+
             } catch (excpetion: Exception) {
                 logErro("Cannot get Ghibli People", excpetion)
                 whenFailConnection()
@@ -124,7 +139,7 @@ class CharactersRepository {
         }
     }
 
-    private fun createSearchCharacterById(id: String): Call<GhibliCharacter> {
+    private fun createSearchPeopleById(id: String): Call<GhibliCharacter> {
         val retrofit = GhibliApiRetrofit()
         return retrofit.returnCharacterById(id)
     }
@@ -137,5 +152,10 @@ class CharactersRepository {
     private fun createSearchGhibliPeople(): Call<List<GhibliCharacter>> {
         val retrofit = GhibliApiRetrofit()
         return retrofit.returnGhibliPeople()
+    }
+
+    private fun createSearchGhibliSpecies(): Call<List<Species>> {
+        val retrofit = GhibliApiRetrofit()
+        return retrofit.returnGhibliSpecies()
     }
 }

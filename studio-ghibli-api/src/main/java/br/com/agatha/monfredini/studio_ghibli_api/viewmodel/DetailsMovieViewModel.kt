@@ -15,12 +15,8 @@ class DetailsMovieViewModel(private val repository: CharactersRepository) : View
     private val _characterList = MutableLiveData<List<GhibliCharacter>>()
     val characterList: LiveData<List<GhibliCharacter>> = _characterList
 
-    private val _character = MutableLiveData<GhibliCharacter>()
-    val character: LiveData<GhibliCharacter> = _character
-
     private val _ghibliPeople = MutableLiveData<List<GhibliCharacter>>()
     val ghibliPeople: LiveData<List<GhibliCharacter>> = _ghibliPeople
-
 
     fun getCharacterByMovie(movie: Movie, whenFail: () -> Unit) {
         repository.getCharacterByMovie(viewModelScope, movie, whenFail) { characters ->
@@ -29,16 +25,10 @@ class DetailsMovieViewModel(private val repository: CharactersRepository) : View
         }
     }
 
-    fun getCharacterById(id: String, whenFailConnection: () -> Unit) {
-        viewModelScope.launch {
-            _character.value = repository.getCharacterById(id, whenFailConnection)
-        }
-    }
-
-    fun getGhibliPeople(whenFail: () -> Unit) {
-        repository.getGhibliPeople(viewModelScope, whenFail) { people ->
-            _ghibliPeople.value = people
-            logInfo("Ghibli People = $people")
+    fun getGhibliAllCharacters(whenFail: () -> Unit) {
+        repository.getGhibliCharacters(viewModelScope, whenFail) { characters ->
+            _ghibliPeople.value = characters
+            logInfo("Ghibli People = $characters")
         }
     }
 }

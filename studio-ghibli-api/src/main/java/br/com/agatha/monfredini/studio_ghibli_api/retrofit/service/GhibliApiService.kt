@@ -14,6 +14,9 @@ interface GhibliApiService {
     @GET("people")
     fun searchGhibliPeople(): retrofit2.Call<List<GhibliCharacter>>
 
+    @GET("species")
+    fun searchGhibliSpecies(): retrofit2.Call<List<Species>>
+
     @GET("people/{id}")
     fun searchCharacterById(@Path("id") id:String): retrofit2.Call<GhibliCharacter>
 
