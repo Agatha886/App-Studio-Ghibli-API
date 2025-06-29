@@ -1,6 +1,8 @@
 package br.com.agatha.monfredini.studio_ghibli_api.repository
 
 import br.com.agatha.monfredini.studio_ghibli_api.commons.LogsStudioGhibliApi.logErro
+import br.com.agatha.monfredini.studio_ghibli_api.commons.StringCommons.NO_CHARACTERS_FOUND
+import br.com.agatha.monfredini.studio_ghibli_api.commons.StringCommons.PARTIAL_CHARACTERS_LOADED
 import br.com.agatha.monfredini.studio_ghibli_api.model.GhibliCharacter
 import br.com.agatha.monfredini.studio_ghibli_api.model.Species
 import br.com.agatha.monfredini.studio_ghibli_api.retrofit.service.GhibliApiRetrofit
@@ -41,8 +43,8 @@ class CharactersRepository {
                 }
 
             } catch (excpetion: Exception) {
-                logErro("Cannot get Ghibli People", excpetion)
-                whenFailConnection("Cannot get studio ghibli people")
+                logErro("Cannot get Ghibli All Chararcters", excpetion)
+                whenFailConnection(NO_CHARACTERS_FOUND)
             }
         }
     }
@@ -55,8 +57,8 @@ class CharactersRepository {
             val characterBody: GhibliCharacter? = call.execute().body()
             return characterBody
         } catch (e: Exception) {
-            logErro("getCharacters: ${e.message}", e)
-            whenFailConnection("Cannot get studio ghibli people")
+            logErro("getPeopleById: ${e.message}", e)
+            whenFailConnection(PARTIAL_CHARACTERS_LOADED)
             null
         }
     }
