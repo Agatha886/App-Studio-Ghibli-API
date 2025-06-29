@@ -1,6 +1,5 @@
 package br.com.agatha.monfredini.studio_ghibli_api.repository
 
-import br.com.agatha.monfredini.studio_ghibli_api.LogsStudioGhibliApi
 import br.com.agatha.monfredini.studio_ghibli_api.LogsStudioGhibliApi.logErro
 import br.com.agatha.monfredini.studio_ghibli_api.di.modules.BASE_URL
 import br.com.agatha.monfredini.studio_ghibli_api.model.GhibliCharacter
