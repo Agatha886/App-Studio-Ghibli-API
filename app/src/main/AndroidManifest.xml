@@ -20,10 +20,16 @@
             android:name=".activity.CharacterDetailActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.MovieDetailsActivity"
+            android:name=".activity.CharactersByMovieActivity"
             android:exported="true" />
         <activity
             android:name=".activity.MoviesListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.AllCharactersActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
