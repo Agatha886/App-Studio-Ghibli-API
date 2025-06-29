@@ -22,9 +22,9 @@ class MoviesListActivity : AppCompatActivity() {
         binding = ActivityMovieListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        adapter = MoviesAdapter { filme ->
+        adapter = MoviesAdapter { movie ->
             val intent = Intent(this, MovieDetailsActivity::class.java)
-            intent.putExtra("filme", filme)
+            intent.putExtra("movie", movie)
             startActivity(intent)
         }
 
@@ -32,7 +32,7 @@ class MoviesListActivity : AppCompatActivity() {
         binding.recyclerFilmes.adapter = adapter
 
         viewModel.whenFail = {
-            Toast.makeText(this, "Erro ao carregar filmes", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Cannot get Movies", Toast.LENGTH_SHORT).show()
         }
 
         viewModel.movies.observe(this) { filmes ->

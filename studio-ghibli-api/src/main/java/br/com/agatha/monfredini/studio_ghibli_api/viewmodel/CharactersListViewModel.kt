@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import br.com.agatha.monfredini.studio_ghibli_api.LogsStudioGhibliApi.logInfo
-import br.com.agatha.monfredini.studio_ghibli_api.di.modules.BASE_URL
 import br.com.agatha.monfredini.studio_ghibli_api.model.GhibliCharacter
 import br.com.agatha.monfredini.studio_ghibli_api.repository.CharactersListRepository
 import br.com.agatha.monfredini.studio_ghibli_api.model.Movie
@@ -16,9 +15,9 @@ class CharactersListViewModel(private val repository: CharactersListRepository) 
     val characterList: LiveData<List<GhibliCharacter>> = _characterList
 
     fun getCharacterByMovie(movie: Movie) {
-        val pessoasUrl: List<String> = movie.people
+        val charactersIds: List<String> = movie.people
         repository.whenFailConnection = whenFail
-        repository.getCharacterByMovie(pessoasUrl) { characters ->
+        repository.getCharacterByMovie(charactersIds) { characters ->
             _characterList.value = characters
             logInfo("Characters = $characters")
         }

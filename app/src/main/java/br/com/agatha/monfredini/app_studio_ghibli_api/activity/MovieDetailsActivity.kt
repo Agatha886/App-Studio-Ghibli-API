@@ -22,22 +22,22 @@ class MovieDetailsActivity : AppCompatActivity() {
         binding = ActivityMovieDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val filme = intent.getSerializableExtra("filme") as? Movie ?: return
-        binding.tituloFilme.text = filme.title
+        val movie = intent.getSerializableExtra("movie") as? Movie ?: return
+        binding.tituloFilme.text = movie.title
 
         adapter = CharacterAdapter()
         binding.recyclerPersonagens.layoutManager = LinearLayoutManager(this)
         binding.recyclerPersonagens.adapter = adapter
         viewModel.whenFail = {
-            Toast.makeText(this, "Erro ao carregar personagens", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Cannot Get Characeters", Toast.LENGTH_SHORT).show()
         }
-        viewModel.characterList.observe(this) { personagens ->
-            adapter.submitList(personagens)
-            logInfo("Movies List : $personagens")
+        viewModel.characterList.observe(this) { characters ->
+            adapter.submitList(characters)
+            logInfo("Movies List : $characters")
         }
 
         binding.btnPreencherPersonagens.setOnClickListener {
-            viewModel.getCharacterByMovie(filme)
+            viewModel.getCharacterByMovie(movie)
         }
     }
 }

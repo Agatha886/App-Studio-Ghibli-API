@@ -1,7 +1,6 @@
 package br.com.agatha.monfredini.studio_ghibli_api.repository
 
 import br.com.agatha.monfredini.studio_ghibli_api.LogsStudioGhibliApi
-import br.com.agatha.monfredini.studio_ghibli_api.LogsStudioGhibliApi.logInfo
 import br.com.agatha.monfredini.studio_ghibli_api.di.modules.BASE_URL
 import br.com.agatha.monfredini.studio_ghibli_api.model.GhibliCharacter
 import br.com.agatha.monfredini.studio_ghibli_api.retrofit.service.MoviesRetrofit
@@ -54,7 +53,6 @@ class CharactersListRepository {
         val call = createSearchByCharacter(id)
         return try {
             val characterBody = call.execute().body()
-            logInfo("personagem : $characterBody")
             return characterBody
         } catch (e: Exception) {
             LogsStudioGhibliApi.logErro("getCharacters: ${e.message}", e)
