@@ -65,7 +65,7 @@ class CharactersListRepository {
             val characterBody = call.execute().body()
             return characterBody
         } catch (e: Exception) {
-            LogsStudioGhibliApi.logErro("getCharacters: ${e.message}", e)
+            logErro("getCharacters: ${e.message}", e)
             whenFailConnection()
             null
         }
