@@ -7,7 +7,7 @@ import br.com.agatha.monfredini.studio_ghibli_api.viewmodel.CharactersListViewMo
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-private const val BASE_URL = "https://ghibliapi.herokuapp.com/"
+internal const val BASE_URL = "https://ghibliapi.vercel.app"
 
 val repository = module {
     single<MovieListRepository> {

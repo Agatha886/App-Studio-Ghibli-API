@@ -2,6 +2,7 @@ package br.com.agatha.monfredini.studio_ghibli_api.repository
 
 import androidx.lifecycle.MutableLiveData
 import br.com.agatha.monfredini.studio_ghibli_api.LogsStudioGhibliApi
+import br.com.agatha.monfredini.studio_ghibli_api.LogsStudioGhibliApi.logInfo
 import br.com.agatha.monfredini.studio_ghibli_api.model.Movie
 import br.com.agatha.monfredini.studio_ghibli_api.retrofit.service.MoviesRetrofit
 import kotlinx.coroutines.CoroutineScope
@@ -21,7 +22,7 @@ class MovieListRepository {
         scope.launch {
             try {
                 val response = call.execute()
-                val movies: List<Movie>? = response.body()
+                val movies = response.body()
                 withContext(Dispatchers.Main) {
                     liveData.value = movies
                 }

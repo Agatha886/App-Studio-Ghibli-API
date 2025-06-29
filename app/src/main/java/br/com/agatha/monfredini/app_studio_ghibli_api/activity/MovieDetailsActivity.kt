@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.agatha.monfredini.app_studio_ghibli_api.adapter.CharacterAdapter
 import br.com.agatha.monfredini.app_studio_ghibli_api.databinding.ActivityMovieDetailsBinding
+import br.com.agatha.monfredini.studio_ghibli_api.LogsStudioGhibliApi.logInfo
 import br.com.agatha.monfredini.studio_ghibli_api.model.Movie
 import br.com.agatha.monfredini.studio_ghibli_api.viewmodel.CharactersListViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -32,6 +33,7 @@ class MovieDetailsActivity : AppCompatActivity() {
         }
         viewModel.characterList.observe(this) { personagens ->
             adapter.submitList(personagens)
+            logInfo("Movies List : $personagens")
         }
 
         binding.btnPreencherPersonagens.setOnClickListener {

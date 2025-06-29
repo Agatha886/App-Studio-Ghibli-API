@@ -1,5 +1,6 @@
 package br.com.agatha.monfredini.studio_ghibli_api.retrofit.service
 
+import br.com.agatha.monfredini.studio_ghibli_api.di.modules.BASE_URL
 import br.com.agatha.monfredini.studio_ghibli_api.model.GhibliCharacter
 import br.com.agatha.monfredini.studio_ghibli_api.model.Movie
 import retrofit2.Call
@@ -16,7 +17,7 @@ class MoviesRetrofit {
     }
 
     private fun baseRetrofit() = Retrofit.Builder()
-        .baseUrl("https://ghibliapi.herokuapp.com/")
+        .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 

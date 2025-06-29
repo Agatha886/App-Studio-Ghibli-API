@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.agatha.monfredini.app_studio_ghibli_api.adapter.MoviesAdapter
 import br.com.agatha.monfredini.studio_ghibli_api.viewmodel.MoviesListViewModel
 import br.com.agatha.monfredini.app_studio_ghibli_api.databinding.ActivityMovieListBinding
+import br.com.agatha.monfredini.studio_ghibli_api.LogsStudioGhibliApi.logInfo
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MoviesListActivity : AppCompatActivity() {
