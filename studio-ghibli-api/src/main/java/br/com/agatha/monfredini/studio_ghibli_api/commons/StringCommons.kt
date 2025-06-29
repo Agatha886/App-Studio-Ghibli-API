@@ -11,7 +11,5 @@ object StringCommons {
 
     internal const val NO_LOCATIONS_FOUND = "We couldn’t find any locations. Please check your connection or try again later."
 
-    internal const val PARTIAL_VEHICLES_LOADED = "Some vehicles from this movie weren’t loaded. Please try again later."
-
     internal const val NO_VEHICLES_FOUND = "Oops! We couldn’t load any vehicles. Please check your connection and try again."
 }
