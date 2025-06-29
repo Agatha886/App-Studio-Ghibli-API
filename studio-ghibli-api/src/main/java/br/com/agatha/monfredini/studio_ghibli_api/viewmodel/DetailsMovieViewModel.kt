@@ -23,8 +23,7 @@ class DetailsMovieViewModel(private val repository: CharactersRepository) : View
 
 
     fun getCharacterByMovie(movie: Movie, whenFail: () -> Unit) {
-        val charactersIds: List<String> = movie.people
-        repository.getCharacterByMovie(viewModelScope, charactersIds, whenFail) { characters ->
+        repository.getCharacterByMovie(viewModelScope, movie, whenFail) { characters ->
             _characterList.value = characters
             logInfo("Characters = $characters")
         }

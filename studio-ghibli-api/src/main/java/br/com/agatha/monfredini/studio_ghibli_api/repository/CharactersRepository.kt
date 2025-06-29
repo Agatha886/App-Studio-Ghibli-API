@@ -3,6 +3,8 @@ package br.com.agatha.monfredini.studio_ghibli_api.repository
 import br.com.agatha.monfredini.studio_ghibli_api.LogsStudioGhibliApi.logErro
 import br.com.agatha.monfredini.studio_ghibli_api.di.modules.BASE_URL
 import br.com.agatha.monfredini.studio_ghibli_api.model.GhibliCharacter
+import br.com.agatha.monfredini.studio_ghibli_api.model.Movie
+import br.com.agatha.monfredini.studio_ghibli_api.model.Species
 import br.com.agatha.monfredini.studio_ghibli_api.retrofit.service.GhibliApiRetrofit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -13,12 +15,13 @@ class CharactersRepository {
 
     fun getCharacterByMovie(
         viewModelScope: CoroutineScope,
-        charactersIds: List<String>,
+        movie: Movie,
         whenFailConnection: () -> Unit,
         getCharacters: (character: List<GhibliCharacter>) -> Unit
     ) {
         CoroutineScope(IO).launch {
             val characters = mutableListOf<GhibliCharacter>()
+            val charactersIds = getCharactersIds(movie, whenFailConnection)
 
             filterCharacters(charactersIds, whenFailConnection, characters)
 
@@ -31,6 +34,18 @@ class CharactersRepository {
                 }
             }
         }
+    }
+
+    private fun getCharactersIds(movie: Movie, whenFailConnection: () -> Unit): List<String> {
+        val mutableListOf = mutableListOf<String>()
+        mutableListOf.addAll(movie.people)
+        val ghibliSpeciesPeopleIds = getGhibliSpeciesPeopleIds(movie.species[0], whenFailConnection)
+        ghibliSpeciesPeopleIds?.forEach { id ->
+            if(id !in mutableListOf){
+                mutableListOf.add(id)
+            }
+        }
+        return mutableListOf
     }
 
     private fun filterCharacters(
@@ -91,9 +106,27 @@ class CharactersRepository {
         }
     }
 
+    private fun getGhibliSpeciesPeopleIds(id: String, whenFailConnection: () -> Unit): List<String>? {
+        val speciesId = id.replace("$BASE_URL/species/", "")
+        val call = createSearchSpeciesById(speciesId)
+        return try {
+            val body = call.execute().body()
+            body?.people
+        } catch (excpetion: Exception) {
+            logErro("Cannot Species People Ids", excpetion)
+            whenFailConnection()
+            null
+        }
+    }
+
     private fun createSearchCharacterById(id: String): Call<GhibliCharacter> {
         val retrofit = GhibliApiRetrofit()
         return retrofit.returnCharacterById(id)
+    }
+
+    private fun createSearchSpeciesById(id: String): Call<Species> {
+        val retrofit = GhibliApiRetrofit()
+        return retrofit.returnSpeciesById(id)
     }
 
     private fun createSearchGhibliPeople(): Call<List<GhibliCharacter>> {

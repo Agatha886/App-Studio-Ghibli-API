@@ -7,5 +7,6 @@ data class Movie(
     val description: String,
     val release_date: String,
     var poster: Int,
-    val people: List<String>
-):Serializable
+    val people: List<String>,
+    val species: List<String>,
+) : Serializable
