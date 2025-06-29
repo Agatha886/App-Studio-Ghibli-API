@@ -42,8 +42,7 @@ class VehiclesRepository {
         whenFailConnection: (message: String) -> Unit
     ) {
         vehicles.forEach { vehicle ->
-            val id = vehicle.pilotUrl.replace("$BASE_URL/people/", "")
-            val character = getPeopleById(id, whenFailConnection)
+            val character = getPeopleById( vehicle.pilotId, whenFailConnection)
             character?.let {
                 vehicle.pilotCharacter = it
             }

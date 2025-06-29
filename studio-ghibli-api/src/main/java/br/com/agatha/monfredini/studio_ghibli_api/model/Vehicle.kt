@@ -1,5 +1,6 @@
 package br.com.agatha.monfredini.studio_ghibli_api.model
 
+import br.com.agatha.monfredini.studio_ghibli_api.commons.StringCommons.BASE_URL
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
@@ -9,6 +10,9 @@ data class Vehicle(
     val description: String,
     val vehicle_class: String,
     val length: String,
-    @SerializedName("pilot") val pilotUrl: String,
+    @SerializedName("pilot") private val pilotUrl: String,
     var pilotCharacter: GhibliCharacter? = null
-) : Serializable
+) : Serializable {
+    val pilotId: String
+        get() = pilotUrl.replace("$BASE_URL/people/", "")
+}
