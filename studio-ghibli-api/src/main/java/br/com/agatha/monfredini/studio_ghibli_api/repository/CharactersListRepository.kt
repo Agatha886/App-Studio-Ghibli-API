@@ -26,7 +26,7 @@ class CharactersListRepository {
             viewModelScope.launch {
                 if (characters.isEmpty()) {
                     whenFailConnection()
-                    logErro("Characters List is empty. This Movie Doesn't have any character", null)
+                    logErro("Characters List is empty. This Movie Doesn't have people", null)
                 } else {
                     getCharacters(characters)
                 }
