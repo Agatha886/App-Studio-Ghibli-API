@@ -6,16 +6,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.agatha.monfredini.studio_ghibli_api.commons.LogsStudioGhibliApi.logInfo
 import br.com.agatha.monfredini.studio_ghibli_api.model.GhibliCharacter
-import br.com.agatha.monfredini.studio_ghibli_api.repository.GhibliCharactersRepository
+import br.com.agatha.monfredini.studio_ghibli_api.repository.CharactersRepository
 
-class GhibliCharactersViewModel(private val repository: GhibliCharactersRepository) : ViewModel() {
+class CharactersViewModel(private val repository: CharactersRepository) : ViewModel() {
 
-    private val _ghibliAllCharacters = MutableLiveData<List<GhibliCharacter>>()
-    val ghibliAllCharacters: LiveData<List<GhibliCharacter>> = _ghibliAllCharacters
+    private val _allCharacters = MutableLiveData<List<GhibliCharacter>>()
+    val allCharacters: LiveData<List<GhibliCharacter>> = _allCharacters
 
     fun getGhibliAllCharacters(whenFail: (mensage:String) -> Unit) {
         repository.getGhibliCharacters(viewModelScope, whenFail) { characters ->
-            _ghibliAllCharacters.value = characters
+            _allCharacters.value = characters
             logInfo("Ghibli People = $characters")
         }
     }

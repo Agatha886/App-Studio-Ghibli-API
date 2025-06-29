@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.agatha.monfredini.app_studio_ghibli_api.adapter.ListCharactersAdapter
 import br.com.agatha.monfredini.app_studio_ghibli_api.databinding.ActivityMovieDetailsBinding
 import br.com.agatha.monfredini.studio_ghibli_api.commons.LogsStudioGhibliApi.logInfo
-import br.com.agatha.monfredini.studio_ghibli_api.viewmodel.GhibliCharactersViewModel
+import br.com.agatha.monfredini.studio_ghibli_api.viewmodel.CharactersViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AllCharactersActivity : AppCompatActivity() {
 
-    private val viewModel: GhibliCharactersViewModel by viewModel()
+    private val viewModel: CharactersViewModel by viewModel()
     private lateinit var adapter: ListCharactersAdapter
     private lateinit var binding: ActivityMovieDetailsBinding
 
@@ -31,7 +31,7 @@ class AllCharactersActivity : AppCompatActivity() {
         binding.recyclerCharacters.layoutManager = LinearLayoutManager(this)
         binding.recyclerCharacters.adapter = adapter
 
-        viewModel.ghibliAllCharacters.observe(this) { characters ->
+        viewModel.allCharacters.observe(this) { characters ->
             adapter.submitList(characters)
         }
 

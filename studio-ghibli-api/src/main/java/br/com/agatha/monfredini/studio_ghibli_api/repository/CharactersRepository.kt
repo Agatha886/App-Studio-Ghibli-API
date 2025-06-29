@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import retrofit2.Call
 
-class GhibliCharactersRepository {
+class CharactersRepository {
 
     fun getGhibliCharacters(
         viewModelScope: CoroutineScope,
