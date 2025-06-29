@@ -12,15 +12,15 @@ import br.com.agatha.monfredini.studio_ghibli_api.model.Movie
 class CharactersListViewModel(private val repository: CharactersListRepository) : ViewModel() {
 
     var whenFail: () -> Unit = {}
-    private val _characterList = MutableLiveData<MutableList<GhibliCharacter>>()
-    val characterList: LiveData<MutableList<GhibliCharacter>> = _characterList
+    private val _characterList = MutableLiveData<List<GhibliCharacter>>()
+    val characterList: LiveData<List<GhibliCharacter>> = _characterList
 
     fun getCharacterByMovie(movie: Movie) {
         val pessoasUrl: List<String> = movie.people
         repository.whenFailConnection = whenFail
         repository.getCharacterByMovie(pessoasUrl) { characters ->
             _characterList.value = characters
+            logInfo("Characters = $characters")
         }
-        logInfo("_characterList = ${_characterList.value}")
     }
 }
