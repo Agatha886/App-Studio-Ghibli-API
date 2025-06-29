@@ -40,14 +40,30 @@ class CharactersRepository {
         val mutableListOf = mutableListOf<String>()
         mutableListOf.addAll(movie.people)
         movie.species.forEach { id ->
-            getGhibliSpeciesIds(id, whenFailConnection)?.forEach { id ->
-                if (id !in mutableListOf) {
-                    mutableListOf.add(id)
+            getGhibliSpeciesIds(id, whenFailConnection)?.forEach { idSpecies ->
+                if (idSpecies !in mutableListOf) {
+                    mutableListOf.add(idSpecies)
                 }
             }
         }
 
         return mutableListOf
+    }
+
+    private fun getGhibliSpeciesIds(
+        id: String,
+        whenFailConnection: () -> Unit
+    ): List<String>? {
+        val speciesId = id.replace("$BASE_URL/species/", "")
+        val call = createSearchSpeciesById(speciesId)
+        return try {
+            val body = call.execute().body()
+            body?.people
+        } catch (excpetion: Exception) {
+            logErro("Cannot Species People Ids", excpetion)
+            whenFailConnection()
+            null
+        }
     }
 
     private fun filterCharacters(
@@ -120,22 +136,6 @@ class CharactersRepository {
                 logErro("Cannot get Ghibli People", excpetion)
                 whenFailConnection()
             }
-        }
-    }
-
-    private fun getGhibliSpeciesIds(
-        id: String,
-        whenFailConnection: () -> Unit
-    ): List<String>? {
-        val speciesId = id.replace("$BASE_URL/species/", "")
-        val call = createSearchSpeciesById(speciesId)
-        return try {
-            val body = call.execute().body()
-            body?.people
-        } catch (excpetion: Exception) {
-            logErro("Cannot Species People Ids", excpetion)
-            whenFailConnection()
-            null
         }
     }
 
