@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import br.com.agatha.monfredini.app_studio_ghibli_api.databinding.ActivityCharacterDetailBinding
-import br.com.agatha.monfredini.studio_ghibli_api.LogsStudioGhibliApi.logInfo
+import br.com.agatha.monfredini.studio_ghibli_api.commons.LogsStudioGhibliApi.logInfo
 import br.com.agatha.monfredini.studio_ghibli_api.model.GhibliCharacter
 
 class CharacterDetailActivity : AppCompatActivity() {

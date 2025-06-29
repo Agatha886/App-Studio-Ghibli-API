@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.agatha.monfredini.app_studio_ghibli_api.adapter.ListCharactersAdapter
 import br.com.agatha.monfredini.app_studio_ghibli_api.databinding.ActivityMovieDetailsBinding
 import br.com.agatha.monfredini.studio_ghibli_api.model.Movie
-import br.com.agatha.monfredini.studio_ghibli_api.viewmodel.DetailsMovieViewModel
+import br.com.agatha.monfredini.studio_ghibli_api.viewmodel.CharactersByMovieViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieDetailsActivity : AppCompatActivity() {
 
-    private val viewModel: DetailsMovieViewModel by viewModel()
+    private val viewModel: CharactersByMovieViewModel by viewModel()
     private lateinit var adapter: ListCharactersAdapter
     private lateinit var binding: ActivityMovieDetailsBinding
 
@@ -39,8 +39,8 @@ class MovieDetailsActivity : AppCompatActivity() {
         }
 
         binding.btnGetCharacters.setOnClickListener {
-            viewModel.getCharacterByMovie(movie) {
-                Toast.makeText(this, "Cannot Get Characters", Toast.LENGTH_SHORT).show()
+            viewModel.getCharacterByMovie(movie) { message ->
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
             }
         }
     }

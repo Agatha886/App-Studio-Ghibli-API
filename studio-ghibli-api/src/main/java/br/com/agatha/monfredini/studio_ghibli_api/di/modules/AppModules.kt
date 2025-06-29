@@ -1,27 +1,24 @@
 package br.com.agatha.monfredini.studio_ghibli_api.di.modules
 
+import br.com.agatha.monfredini.studio_ghibli_api.repository.CharactersByMovieRepository
+import br.com.agatha.monfredini.studio_ghibli_api.repository.GhibliCharactersRepository
 import br.com.agatha.monfredini.studio_ghibli_api.repository.MovieListRepository
-import br.com.agatha.monfredini.studio_ghibli_api.repository.CharactersRepository
+import br.com.agatha.monfredini.studio_ghibli_api.viewmodel.CharactersByMovieViewModel
+import br.com.agatha.monfredini.studio_ghibli_api.viewmodel.GhibliCharactersViewModel
 import br.com.agatha.monfredini.studio_ghibli_api.viewmodel.MoviesListViewModel
-import br.com.agatha.monfredini.studio_ghibli_api.viewmodel.DetailsMovieViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-internal const val BASE_URL = "https://ghibliapi.vercel.app"
-
-val repository = module {
-    single<MovieListRepository> {
-        MovieListRepository()
-    }
-
-    single<CharactersRepository> { CharactersRepository() }
+val ghibliApiRepository = module {
+    single<MovieListRepository> { MovieListRepository() }
+    single<CharactersByMovieRepository> { CharactersByMovieRepository() }
+    single<GhibliCharactersRepository> { GhibliCharactersRepository() }
 }
 
-val model = module {
-    viewModel<MoviesListViewModel> {
-        MoviesListViewModel(get())
-    }
+val ghibliApiViewModel = module {
+    viewModel<MoviesListViewModel> { MoviesListViewModel(get()) }
+    viewModel<CharactersByMovieViewModel> { CharactersByMovieViewModel(get()) }
+    viewModel<GhibliCharactersViewModel> { GhibliCharactersViewModel(get()) }
 
-    viewModel<DetailsMovieViewModel> { DetailsMovieViewModel(get()) }
 }
 

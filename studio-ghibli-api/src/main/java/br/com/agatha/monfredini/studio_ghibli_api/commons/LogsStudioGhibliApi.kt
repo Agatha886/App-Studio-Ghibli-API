@@ -1,4 +1,4 @@
-package br.com.agatha.monfredini.studio_ghibli_api
+package br.com.agatha.monfredini.studio_ghibli_api.commons
 
 import android.util.Log
 

@@ -1,6 +1,6 @@
 package br.com.agatha.monfredini.studio_ghibli_api.retrofit.service
 
-import br.com.agatha.monfredini.studio_ghibli_api.di.modules.BASE_URL
+import br.com.agatha.monfredini.studio_ghibli_api.commons.StringCommons.BASE_URL
 import br.com.agatha.monfredini.studio_ghibli_api.model.GhibliCharacter
 import br.com.agatha.monfredini.studio_ghibli_api.model.Movie
 import br.com.agatha.monfredini.studio_ghibli_api.model.Species

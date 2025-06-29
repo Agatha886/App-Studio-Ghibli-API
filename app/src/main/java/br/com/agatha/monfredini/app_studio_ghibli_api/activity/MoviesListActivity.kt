@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.agatha.monfredini.app_studio_ghibli_api.adapter.MoviesAdapter
 import br.com.agatha.monfredini.studio_ghibli_api.viewmodel.MoviesListViewModel
 import br.com.agatha.monfredini.app_studio_ghibli_api.databinding.ActivityMovieListBinding
-import br.com.agatha.monfredini.studio_ghibli_api.LogsStudioGhibliApi.logInfo
+import br.com.agatha.monfredini.studio_ghibli_api.commons.LogsStudioGhibliApi.logInfo
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MoviesListActivity : AppCompatActivity() {
@@ -31,17 +31,15 @@ class MoviesListActivity : AppCompatActivity() {
         binding.recyclerMovies.layoutManager = LinearLayoutManager(this)
         binding.recyclerMovies.adapter = adapter
 
-        viewModel.whenFail = {
-            Toast.makeText(this, "Cannot get Movies", Toast.LENGTH_SHORT).show()
-        }
-
         viewModel.movies.observe(this) { movies ->
             adapter.submitList(movies)
             logInfo("Movies: $movies")
         }
 
         binding.btnGetMovies.setOnClickListener {
-            viewModel.getMovies()
+            viewModel.getMovies { message ->
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }

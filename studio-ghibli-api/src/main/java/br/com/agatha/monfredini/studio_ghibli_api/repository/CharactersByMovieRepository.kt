@@ -1,7 +1,9 @@
 package br.com.agatha.monfredini.studio_ghibli_api.repository
 
-import br.com.agatha.monfredini.studio_ghibli_api.LogsStudioGhibliApi.logErro
-import br.com.agatha.monfredini.studio_ghibli_api.di.modules.BASE_URL
+import br.com.agatha.monfredini.studio_ghibli_api.commons.LogsStudioGhibliApi.logErro
+import br.com.agatha.monfredini.studio_ghibli_api.commons.StringCommons.BASE_URL
+import br.com.agatha.monfredini.studio_ghibli_api.commons.StringCommons.NO_CHARACTERS_FOUND
+import br.com.agatha.monfredini.studio_ghibli_api.commons.StringCommons.PARTIAL_CHARACTERS_LOADED
 import br.com.agatha.monfredini.studio_ghibli_api.model.GhibliCharacter
 import br.com.agatha.monfredini.studio_ghibli_api.model.Movie
 import br.com.agatha.monfredini.studio_ghibli_api.model.Species
@@ -11,12 +13,12 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import retrofit2.Call
 
-class CharactersRepository {
+class CharactersByMovieRepository {
 
     fun getCharacterByMovie(
         viewModelScope: CoroutineScope,
         movie: Movie,
-        whenFailConnection: () -> Unit,
+        whenFailConnection: (mensage:String) -> Unit,
         getCharacters: (character: List<GhibliCharacter>) -> Unit
     ) {
         CoroutineScope(IO).launch {
@@ -27,7 +29,7 @@ class CharactersRepository {
 
             viewModelScope.launch {
                 if (characters.isEmpty()) {
-                    whenFailConnection()
+                    whenFailConnection(NO_CHARACTERS_FOUND)
                     logErro("Characters List is empty. This Movie Doesn't have people", null)
                 } else {
                     getCharacters(characters)
@@ -36,7 +38,7 @@ class CharactersRepository {
         }
     }
 
-    private fun getCharactersIds(movie: Movie, whenFailConnection: () -> Unit): List<String> {
+    private fun getCharactersIds(movie: Movie, whenFailConnection: (mensage:String) -> Unit): List<String> {
         val mutableListOf = mutableListOf<String>()
         mutableListOf.addAll(movie.people)
         movie.species.forEach { id ->
@@ -52,7 +54,7 @@ class CharactersRepository {
 
     private fun getGhibliSpeciesIds(
         id: String,
-        whenFailConnection: () -> Unit
+        whenFailConnection: (mensage:String) -> Unit
     ): List<String>? {
         val speciesId = id.replace("$BASE_URL/species/", "")
         val call = createSearchSpeciesById(speciesId)
@@ -61,14 +63,14 @@ class CharactersRepository {
             body?.people
         } catch (excpetion: Exception) {
             logErro("Cannot Species People Ids", excpetion)
-            whenFailConnection()
+            whenFailConnection(PARTIAL_CHARACTERS_LOADED)
             null
         }
     }
 
     private fun filterCharacters(
         charactersIds: List<String>,
-        whenFailConnection: () -> Unit,
+        whenFailConnection: (mensage:String) -> Unit,
         characters: MutableList<GhibliCharacter>
     ) {
         for ((index, id) in charactersIds.withIndex()) {
@@ -90,7 +92,7 @@ class CharactersRepository {
 
     private fun getPeopleById(
         id: String,
-        whenFailConnection: () -> Unit,
+        whenFailConnection: (mensage:String) -> Unit,
     ): GhibliCharacter? {
         val call = createSearchPeopleById(id)
         return try {
@@ -98,44 +100,8 @@ class CharactersRepository {
             return characterBody
         } catch (e: Exception) {
             logErro("getCharacters: ${e.message}", e)
-            whenFailConnection()
+            whenFailConnection(PARTIAL_CHARACTERS_LOADED)
             null
-        }
-    }
-
-    fun getGhibliCharacters(
-        viewModelScope: CoroutineScope,
-        whenFailConnection: () -> Unit,
-        getGhibliPeople: (people: List<GhibliCharacter>) -> Unit
-    ) {
-        CoroutineScope(IO).launch {
-            val callPeople = createSearchGhibliPeople()
-            val callSpecies = createSearchGhibliSpecies()
-            try {
-                val mutableListOf = mutableListOf<GhibliCharacter>()
-                val people: List<GhibliCharacter>? = callPeople.execute().body()
-                val species = callSpecies.execute().body()
-                people?.let {
-                    mutableListOf.addAll(people)
-                }
-
-                species?.forEach { specie ->
-                    specie.people.forEach { id ->
-                        val character = getPeopleById(id, whenFailConnection)
-                        if (!mutableListOf.contains(character) && character != null) {
-                            mutableListOf.add(character)
-                        }
-                    }
-                }
-
-                viewModelScope.launch {
-                    getGhibliPeople(mutableListOf)
-                }
-
-            } catch (excpetion: Exception) {
-                logErro("Cannot get Ghibli People", excpetion)
-                whenFailConnection()
-            }
         }
     }
 
@@ -147,15 +113,5 @@ class CharactersRepository {
     private fun createSearchSpeciesById(id: String): Call<Species> {
         val retrofit = GhibliApiRetrofit()
         return retrofit.returnSpeciesById(id)
-    }
-
-    private fun createSearchGhibliPeople(): Call<List<GhibliCharacter>> {
-        val retrofit = GhibliApiRetrofit()
-        return retrofit.returnGhibliPeople()
-    }
-
-    private fun createSearchGhibliSpecies(): Call<List<Species>> {
-        val retrofit = GhibliApiRetrofit()
-        return retrofit.returnGhibliSpecies()
     }
 }

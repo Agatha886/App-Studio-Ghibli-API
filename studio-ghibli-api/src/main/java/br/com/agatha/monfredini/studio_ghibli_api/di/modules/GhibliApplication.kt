@@ -10,7 +10,7 @@ class GhibliApplication : Application() {
 
         startKoin {
             androidContext(this@GhibliApplication)
-            modules(listOf(repository, model))
+            modules(listOf(ghibliApiRepository, ghibliApiViewModel))
         }
     }
 }
