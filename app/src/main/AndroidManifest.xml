@@ -17,6 +17,12 @@
         android:theme="@style/Theme.AppStudioGhibliAPI"
         tools:targetApi="31">
         <activity
+            android:name=".activity.VehiclesDetailActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.VehiclesListActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.CharacterDetailActivity"
             android:exported="true" />
         <activity

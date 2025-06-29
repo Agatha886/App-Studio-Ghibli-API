@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnVehicles.setOnClickListener {
-//            startActivity(Intent(this, VehiclesListActivity::class.java))
+            startActivity(Intent(this, VehiclesListActivity::class.java))
         }
 
         binding.btnLocations.setOnClickListener {
