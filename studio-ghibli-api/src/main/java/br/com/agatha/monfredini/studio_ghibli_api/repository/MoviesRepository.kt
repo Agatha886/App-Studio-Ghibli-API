@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Call
 
-class MovieListRepository {
+class MoviesRepository {
 
     fun getMovies(viewModelScope: CoroutineScope, whenFailConnection: (message:String) -> Unit, getMovies: (List<Movie>) -> Unit) {
         val call = createService()

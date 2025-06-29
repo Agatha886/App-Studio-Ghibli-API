@@ -2,6 +2,7 @@ package br.com.agatha.monfredini.studio_ghibli_api.retrofit.service
 
 import br.com.agatha.monfredini.studio_ghibli_api.commons.StringCommons.BASE_URL
 import br.com.agatha.monfredini.studio_ghibli_api.model.GhibliCharacter
+import br.com.agatha.monfredini.studio_ghibli_api.model.Location
 import br.com.agatha.monfredini.studio_ghibli_api.model.Movie
 import br.com.agatha.monfredini.studio_ghibli_api.model.Species
 import br.com.agatha.monfredini.studio_ghibli_api.model.Vehicle
@@ -41,6 +42,10 @@ class GhibliApiRetrofit {
 
     fun returnVehicles(): Call<List<Vehicle>> {
         return service.searchGhibliVehicles()
+    }
+
+    fun returnLocations(): Call<List<Location>> {
+        return service.searchGhibliLocations()
     }
 
 }

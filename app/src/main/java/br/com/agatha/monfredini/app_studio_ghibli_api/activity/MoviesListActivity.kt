@@ -6,14 +6,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.agatha.monfredini.app_studio_ghibli_api.adapter.MoviesAdapter
-import br.com.agatha.monfredini.studio_ghibli_api.viewmodel.MoviesListViewModel
+import br.com.agatha.monfredini.studio_ghibli_api.viewmodel.MoviesViewModel
 import br.com.agatha.monfredini.app_studio_ghibli_api.databinding.ActivityMovieListBinding
 import br.com.agatha.monfredini.studio_ghibli_api.commons.LogsStudioGhibliApi.logInfo
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MoviesListActivity : AppCompatActivity() {
 
-    private val viewModel: MoviesListViewModel by viewModel()
+    private val viewModel: MoviesViewModel by viewModel()
     private lateinit var adapter: MoviesAdapter
     private lateinit var binding: ActivityMovieListBinding
 
