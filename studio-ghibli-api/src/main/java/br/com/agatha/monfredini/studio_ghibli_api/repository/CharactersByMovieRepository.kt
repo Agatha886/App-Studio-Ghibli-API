@@ -100,7 +100,7 @@ class CharactersByMovieRepository {
             return characterBody
         } catch (e: Exception) {
             logErro("getCharacters: ${e.message}", e)
-            whenFailConnection(PARTIAL_CHARACTERS_LOADED)
+            whenFailConnection(NO_CHARACTERS_FOUND)
             null
         }
     }
