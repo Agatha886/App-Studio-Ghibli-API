@@ -1,6 +1,9 @@
 package br.com.agatha.monfredini.studio_ghibli_api.repository
 
+import androidx.lifecycle.MutableLiveData
 import br.com.agatha.monfredini.studio_ghibli_api.LogsStudioGhibliApi
+import br.com.agatha.monfredini.studio_ghibli_api.LogsStudioGhibliApi.logInfo
+import br.com.agatha.monfredini.studio_ghibli_api.di.modules.BASE_URL
 import br.com.agatha.monfredini.studio_ghibli_api.model.GhibliCharacter
 import br.com.agatha.monfredini.studio_ghibli_api.retrofit.service.MoviesRetrofit
 import kotlinx.coroutines.CoroutineScope
@@ -13,18 +16,33 @@ import retrofit2.Call
 class CharactersListRepository {
 
     var whenFailConnection: () -> Unit = {}
-    var getCharacterSucess: (character: GhibliCharacter?) -> Unit = {}
+    private val teste = mutableListOf<GhibliCharacter>()
 
-    fun getCharacter(id: String) {
+    fun getCharacterByMovie(
+        peopleList: List<String>,
+        getCharacter: (character: MutableList<GhibliCharacter>) -> Unit
+    ) {
+        for (pessoaUrl in peopleList) {
+            val pessoaId = pessoaUrl.replace("$BASE_URL/people/", "")
+            getCharacterById(pessoaId, getCharacter)
+        }
+    }
+
+    private fun getCharacterById(
+        id: String,
+        getCharacter: (characters: MutableList<GhibliCharacter>) -> Unit
+    ) {
         val call = createSearchByCharacter(id)
-        var character: GhibliCharacter?
-
         CoroutineScope(IO).launch {
             try {
                 val characterBody = call.execute().body()
-                withContext(Main) {
-                    character = characterBody
-                    getCharacterSucess(character)
+                logInfo("personagem : $characterBody")
+                CoroutineScope(Main).launch {
+                    characterBody?.let {
+                        teste.add(it)
+                        logInfo("teste : $teste")
+                        getCharacter(teste)
+                    }
                 }
 
             } catch (e: Exception) {
