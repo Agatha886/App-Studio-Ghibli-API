@@ -10,6 +10,9 @@ interface MovieService {
     @GET("films")
     fun getMovies(): retrofit2.Call<List<Movie>>
 
+    @GET("people")
+    fun searchGhibliPeople(): retrofit2.Call<List<GhibliCharacter>>
+
     @GET("people/{id}")
     fun searchCharacterById(@Path("id") id:String): retrofit2.Call<GhibliCharacter>
 }

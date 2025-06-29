@@ -4,20 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.agatha.monfredini.app_studio_ghibli_api.adapter.ListCharactersAdapter
 import br.com.agatha.monfredini.app_studio_ghibli_api.databinding.ActivityMovieDetailsBinding
-import br.com.agatha.monfredini.studio_ghibli_api.LogsStudioGhibliApi.logInfo
 import br.com.agatha.monfredini.studio_ghibli_api.model.Movie
-import br.com.agatha.monfredini.studio_ghibli_api.viewmodel.CharactersListViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
+import br.com.agatha.monfredini.studio_ghibli_api.viewmodel.DetailsMovieViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieDetailsActivity : AppCompatActivity() {
 
-    private val viewModel: CharactersListViewModel by viewModel()
+    private val viewModel: DetailsMovieViewModel by viewModel()
     private lateinit var adapter: ListCharactersAdapter
     private lateinit var binding: ActivityMovieDetailsBinding
 

@@ -7,7 +7,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class MoviesRetrofit {
+class GhibliApiRetrofit {
 
     private val retrofit: Retrofit = baseRetrofit()
     private val service = retrofit.create(MovieService::class.java)
@@ -21,8 +21,12 @@ class MoviesRetrofit {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    fun returnCharacters(id: String): Call<GhibliCharacter> {
+    fun returnCharacterById(id: String): Call<GhibliCharacter> {
         return service.searchCharacterById(id)
+    }
+
+    fun returnGhibliPeople(): Call<List<GhibliCharacter>> {
+        return service.searchGhibliPeople()
     }
     
 }

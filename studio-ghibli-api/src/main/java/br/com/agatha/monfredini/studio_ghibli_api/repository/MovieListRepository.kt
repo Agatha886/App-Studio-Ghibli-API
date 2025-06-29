@@ -2,9 +2,8 @@ package br.com.agatha.monfredini.studio_ghibli_api.repository
 
 import androidx.lifecycle.MutableLiveData
 import br.com.agatha.monfredini.studio_ghibli_api.LogsStudioGhibliApi
-import br.com.agatha.monfredini.studio_ghibli_api.LogsStudioGhibliApi.logInfo
 import br.com.agatha.monfredini.studio_ghibli_api.model.Movie
-import br.com.agatha.monfredini.studio_ghibli_api.retrofit.service.MoviesRetrofit
+import br.com.agatha.monfredini.studio_ghibli_api.retrofit.service.GhibliApiRetrofit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -36,7 +35,7 @@ class MovieListRepository {
     }
 
     private fun createService(): Call<List<Movie>> {
-        val retrofit = MoviesRetrofit()
+        val retrofit = GhibliApiRetrofit()
         return retrofit.returnMovies()
     }
 
