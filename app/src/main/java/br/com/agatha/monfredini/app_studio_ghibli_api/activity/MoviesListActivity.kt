@@ -28,8 +28,8 @@ class MoviesListActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.recyclerFilmes.layoutManager = LinearLayoutManager(this)
-        binding.recyclerFilmes.adapter = adapter
+        binding.recyclerMovies.layoutManager = LinearLayoutManager(this)
+        binding.recyclerMovies.adapter = adapter
 
         viewModel.whenFail = {
             Toast.makeText(this, "Cannot get Movies", Toast.LENGTH_SHORT).show()
@@ -39,7 +39,7 @@ class MoviesListActivity : AppCompatActivity() {
             adapter.submitList(filmes)
         }
 
-        binding.btnPreencherLista.setOnClickListener {
+        binding.btnGetMovies.setOnClickListener {
             viewModel.getMovies()
         }
     }

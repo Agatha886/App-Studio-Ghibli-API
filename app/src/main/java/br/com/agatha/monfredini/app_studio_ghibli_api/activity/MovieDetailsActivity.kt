@@ -23,11 +23,11 @@ class MovieDetailsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val movie = intent.getSerializableExtra("movie") as? Movie ?: return
-        binding.tituloFilme.text = movie.title
+        binding.movieTitle.text = movie.title
 
         adapter = CharacterAdapter()
-        binding.recyclerPersonagens.layoutManager = LinearLayoutManager(this)
-        binding.recyclerPersonagens.adapter = adapter
+        binding.recyclerCharacters.layoutManager = LinearLayoutManager(this)
+        binding.recyclerCharacters.adapter = adapter
         viewModel.whenFail = {
             Toast.makeText(this, "Cannot Get Characeters", Toast.LENGTH_SHORT).show()
         }
@@ -36,7 +36,7 @@ class MovieDetailsActivity : AppCompatActivity() {
             logInfo("Movies List : $characters")
         }
 
-        binding.btnPreencherPersonagens.setOnClickListener {
+        binding.btnGetCharacters.setOnClickListener {
             viewModel.getCharacterByMovie(movie)
         }
     }

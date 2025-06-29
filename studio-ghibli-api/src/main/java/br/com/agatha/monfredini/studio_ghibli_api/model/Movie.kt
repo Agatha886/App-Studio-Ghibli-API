@@ -7,6 +7,5 @@ data class Movie(
     val description: String,
     val release_date: String,
     var poster: Int,
-    val people: List<String>,
-    var listaPersonagens: MutableList<GhibliCharacter> = mutableListOf()
+    val people: List<String>
 ):Serializable
