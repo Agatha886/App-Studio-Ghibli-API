@@ -8,21 +8,24 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.agatha.monfredini.app_studio_ghibli_api.databinding.ItemCharacterBinding
 import br.com.agatha.monfredini.studio_ghibli_api.model.GhibliCharacter
 
-class CharacterAdapter :
-    ListAdapter<GhibliCharacter, CharacterAdapter.PersonagemViewHolder>(DiffCallback()) {
+class ListCharactersAdapter(
+    private val onClick: (GhibliCharacter) -> Unit
+) :
+    ListAdapter<GhibliCharacter, ListCharactersAdapter.ListCharactersViewHolder>(DiffCallback()) {
 
-    inner class PersonagemViewHolder(private val binding: ItemCharacterBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(personagem: GhibliCharacter) {
-            binding.nome.text = personagem.name
+    inner class ListCharactersViewHolder(private val binding: ItemCharacterBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(character: GhibliCharacter) {
+            binding.nome.text = character.name
+            binding.root.setOnClickListener { onClick(character) }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonagemViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListCharactersViewHolder {
         val binding = ItemCharacterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PersonagemViewHolder(binding)
+        return ListCharactersViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: PersonagemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ListCharactersViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 

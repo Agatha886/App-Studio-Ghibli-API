@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nome"
+            android:enabled="false"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/etGender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Gênero"
+            android:enabled="false"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/etAge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Idade"
+            android:enabled="false"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/etHairColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Cor do Cabelo"
+            android:enabled="false"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/etEyeColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Cor dos Olhos"
+            android:enabled="false"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+</ScrollView>

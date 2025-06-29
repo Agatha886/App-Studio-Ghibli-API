@@ -35,8 +35,9 @@ class MoviesListActivity : AppCompatActivity() {
             Toast.makeText(this, "Cannot get Movies", Toast.LENGTH_SHORT).show()
         }
 
-        viewModel.movies.observe(this) { filmes ->
-            adapter.submitList(filmes)
+        viewModel.movies.observe(this) { movies ->
+            adapter.submitList(movies)
+            logInfo("Movies: $movies")
         }
 
         binding.btnGetMovies.setOnClickListener {

@@ -1,20 +1,24 @@
 package br.com.agatha.monfredini.app_studio_ghibli_api.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import br.com.agatha.monfredini.app_studio_ghibli_api.adapter.CharacterAdapter
+import br.com.agatha.monfredini.app_studio_ghibli_api.adapter.ListCharactersAdapter
 import br.com.agatha.monfredini.app_studio_ghibli_api.databinding.ActivityMovieDetailsBinding
 import br.com.agatha.monfredini.studio_ghibli_api.LogsStudioGhibliApi.logInfo
 import br.com.agatha.monfredini.studio_ghibli_api.model.Movie
 import br.com.agatha.monfredini.studio_ghibli_api.viewmodel.CharactersListViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieDetailsActivity : AppCompatActivity() {
 
     private val viewModel: CharactersListViewModel by viewModel()
-    private lateinit var adapter: CharacterAdapter
+    private lateinit var adapter: ListCharactersAdapter
     private lateinit var binding: ActivityMovieDetailsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,19 +29,23 @@ class MovieDetailsActivity : AppCompatActivity() {
         val movie = intent.getSerializableExtra("movie") as? Movie ?: return
         binding.movieTitle.text = movie.title
 
-        adapter = CharacterAdapter()
+        adapter = ListCharactersAdapter { characeter ->
+            val intent = Intent(this, CharacterDetailActivity::class.java)
+            intent.putExtra("character", characeter)
+            startActivity(intent)
+        }
+
         binding.recyclerCharacters.layoutManager = LinearLayoutManager(this)
         binding.recyclerCharacters.adapter = adapter
-        viewModel.whenFail = {
-            Toast.makeText(this, "Cannot Get Characeters", Toast.LENGTH_SHORT).show()
-        }
+
         viewModel.characterList.observe(this) { characters ->
             adapter.submitList(characters)
-            logInfo("Movies List : $characters")
         }
 
         binding.btnGetCharacters.setOnClickListener {
-            viewModel.getCharacterByMovie(movie)
+            viewModel.getCharacterByMovie(movie) {
+                Toast.makeText(this, "Cannot Get Characters", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
