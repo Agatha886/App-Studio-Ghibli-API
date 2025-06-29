@@ -39,12 +39,14 @@ class CharactersRepository {
     private fun getCharactersIds(movie: Movie, whenFailConnection: () -> Unit): List<String> {
         val mutableListOf = mutableListOf<String>()
         mutableListOf.addAll(movie.people)
-        val ghibliSpeciesPeopleIds = getGhibliSpeciesPeopleIds(movie.species[0], whenFailConnection)
-        ghibliSpeciesPeopleIds?.forEach { id ->
-            if(id !in mutableListOf){
-                mutableListOf.add(id)
+        movie.species.forEach { id ->
+            getGhibliSpeciesIds(id, whenFailConnection)?.forEach { id ->
+                if (id !in mutableListOf) {
+                    mutableListOf.add(id)
+                }
             }
         }
+
         return mutableListOf
     }
 
@@ -106,7 +108,10 @@ class CharactersRepository {
         }
     }
 
-    private fun getGhibliSpeciesPeopleIds(id: String, whenFailConnection: () -> Unit): List<String>? {
+    private fun getGhibliSpeciesIds(
+        id: String,
+        whenFailConnection: () -> Unit
+    ): List<String>? {
         val speciesId = id.replace("$BASE_URL/species/", "")
         val call = createSearchSpeciesById(speciesId)
         return try {
