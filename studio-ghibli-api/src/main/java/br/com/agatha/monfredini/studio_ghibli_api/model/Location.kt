@@ -1,5 +1,6 @@
 package br.com.agatha.monfredini.studio_ghibli_api.model
 
+import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class Location(
@@ -8,5 +9,6 @@ data class Location(
     val climate: String,
     val terrain: String,
     val surface_water: String,
-    val residents: List<String>
-): Serializable
+    @SerializedName("residents") val residentsUrl: List<String>,
+    var residentsCharacter: MutableList<GhibliCharacter?> = mutableListOf()
+) : Serializable
