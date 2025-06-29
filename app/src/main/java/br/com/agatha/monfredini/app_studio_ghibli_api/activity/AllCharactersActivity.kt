@@ -36,7 +36,6 @@ class AllCharactersActivity : AppCompatActivity() {
         }
 
         binding.btnGetCharacters.setOnClickListener {
-            logInfo("Click btnGetCharacters")
             viewModel.getGhibliAllCharacters { message ->
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
             }

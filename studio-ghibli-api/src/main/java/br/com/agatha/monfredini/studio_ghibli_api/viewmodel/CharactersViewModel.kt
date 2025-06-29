@@ -16,7 +16,7 @@ class CharactersViewModel(private val repository: CharactersRepository) : ViewMo
     fun getGhibliAllCharacters(whenFail: (mensage:String) -> Unit) {
         repository.getGhibliCharacters(viewModelScope, whenFail) { characters ->
             _allCharacters.value = characters
-            logInfo("Ghibli People = $characters")
+            logInfo("Ghibli All Characters = $characters")
         }
     }
 }
