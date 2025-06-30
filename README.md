@@ -79,6 +79,7 @@ val ghibliApiViewModel = module {
 Make sure your project includes the following Koin libraries:
 
 ```toml
+koin = "3.5.3"
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
 ```
