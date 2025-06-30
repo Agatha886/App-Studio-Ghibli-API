@@ -3,6 +3,7 @@ package br.com.agatha.monfredini.studio_ghibli_api.repository
 import br.com.agatha.monfredini.studio_ghibli_api.commons.LogsStudioGhibliApi.logErro
 import br.com.agatha.monfredini.studio_ghibli_api.commons.StringCommons.BASE_URL
 import br.com.agatha.monfredini.studio_ghibli_api.commons.StringCommons.NO_LOCATIONS_FOUND
+import br.com.agatha.monfredini.studio_ghibli_api.commons.StringCommons.NO_RESIDENTS_FOUND
 import br.com.agatha.monfredini.studio_ghibli_api.commons.StringCommons.PARTIAL_CHARACTERS_LOADED
 import br.com.agatha.monfredini.studio_ghibli_api.model.GhibliCharacter
 import br.com.agatha.monfredini.studio_ghibli_api.model.Location
@@ -24,7 +25,6 @@ class LocationsRepository {
             try {
                 val locations = call.execute().body()
                 locations?.let {
-                    setResidents(it, whenFailConnection)
                     viewModelScope.launch {
                         getLocations(it)
                     }
@@ -37,15 +37,25 @@ class LocationsRepository {
 
     }
 
-    private fun setResidents(
-        locations: List<Location>,
-        whenFailConnection: (mensage: String) -> Unit
+    fun getResidents(
+        viewModelScope: CoroutineScope,
+        location: Location,
+        whenFailConnection: (mensage: String) -> Unit,
+        setResidents: (list: List<GhibliCharacter?>) -> Unit
     ) {
-        locations.forEach { location ->
+        CoroutineScope(IO).launch {
+            val characeters = mutableListOf<GhibliCharacter?>()
             location.residentsUrl.forEach { url ->
                 val id = url.replace("$BASE_URL/people/", "")
                 val character: GhibliCharacter? = getPeopleById(id, whenFailConnection)
-                location.residentsCharacter.add(character)
+                characeters.add(character)
+            }
+            viewModelScope.launch {
+                if (characeters.isEmpty()) {
+                    whenFailConnection(NO_RESIDENTS_FOUND)
+                } else {
+                    setResidents(characeters)
+                }
             }
         }
     }

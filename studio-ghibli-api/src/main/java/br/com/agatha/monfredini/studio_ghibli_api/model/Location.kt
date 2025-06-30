@@ -9,6 +9,5 @@ data class Location(
     val climate: String,
     val terrain: String,
     val surface_water: String,
-    @SerializedName("residents") val residentsUrl: List<String>,
-    var residentsCharacter: MutableList<GhibliCharacter?> = mutableListOf()
+    @SerializedName("residents") val residentsUrl: List<String>
 ) : Serializable

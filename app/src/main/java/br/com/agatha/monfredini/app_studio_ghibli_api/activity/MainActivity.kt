@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnLocations.setOnClickListener {
-//            startActivity(Intent(this, LocationsListActivity::class.java))
+            startActivity(Intent(this, LocationsListActivity::class.java))
         }
     }
 }
