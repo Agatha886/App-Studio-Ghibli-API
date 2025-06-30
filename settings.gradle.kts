@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "App-Studio-Ghibli-API"
 include(":app")
+include(":studio-ghibli-api")

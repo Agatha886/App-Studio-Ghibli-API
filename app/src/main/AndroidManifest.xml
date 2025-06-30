@@ -2,15 +2,52 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
+        android:name="br.com.agatha.monfredini.studio_ghibli_api.di.modules.GhibliApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/totoro_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/totoro_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppStudioGhibliAPI"
-        tools:targetApi="31" />
+        tools:targetApi="31">
+        <activity
+            android:name=".activity.LocationDetailActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.LocationsListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.VehiclesDetailActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.VehiclesListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.CharacterDetailActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.CharactersByMovieActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.MoviesListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.AllCharactersActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
 
 </manifest>

@@ -1,18 +1,16 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    id("maven-publish")
 }
 
 android {
-    namespace = "br.com.agatha.monfredini.app_studio_ghibli_api"
+    namespace = "br.com.agatha.monfredini.studio_ghibli_api"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "br.com.agatha.monfredini.app_studio_ghibli_api"
         minSdk = 24
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -33,19 +31,46 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    buildFeatures {
-        viewBinding = true
+
+    publishing {
+        singleVariant("release")
+    }
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
+                groupId = "br.com.agatha.monfredini"
+                artifactId = "studio-ghibli-api"
+                version = "1.0.0"
+            }
+        }
     }
 }
 
 dependencies {
-    implementation(project(":studio-ghibli-api"))
+    // Android
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+
+    // Testes
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // ViewModel
+    implementation(libs.lifecycle.extensions)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+
+    // Coroutines
+    implementation(libs.coroutines.core)
+    implementation(libs.coroutines.android)
 
     // Koin
     implementation(libs.koin.core)
