@@ -3,7 +3,7 @@
 This repository provides an Android library module to consume data from the [Studio Ghibli API](https://ghibliapi.vercel.app). It is designed to be modular and easily integrated into any Android application via **JitPack**.
 
 ## 📦 Installation
-
+teste
 To use the `studioghibli` module in your Android project:
 
 ### 1. Add JitPack to your root `build.gradle` (Project level)
