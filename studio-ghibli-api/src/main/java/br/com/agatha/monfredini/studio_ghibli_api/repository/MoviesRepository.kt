@@ -11,7 +11,11 @@ import retrofit2.Call
 
 class MoviesRepository {
 
-    fun getMovies(viewModelScope: CoroutineScope, whenFailConnection: (message:String) -> Unit, getMovies: (List<Movie>) -> Unit) {
+    fun getMovies(
+        viewModelScope: CoroutineScope,
+        whenFailConnection: (message: String) -> Unit,
+        getMovies: (List<Movie>) -> Unit
+    ) {
         val call = createService()
 
         val scope = CoroutineScope(Dispatchers.IO)

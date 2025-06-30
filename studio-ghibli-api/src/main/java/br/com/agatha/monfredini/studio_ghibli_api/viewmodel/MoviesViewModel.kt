@@ -11,8 +11,8 @@ class MoviesViewModel(private val repository: MoviesRepository) : ViewModel() {
     private val _liveData = MutableLiveData<List<Movie>>()
     val movies: LiveData<List<Movie>> = _liveData
 
-    fun getMovies(whenFail: (message: String) -> Unit) {
-        repository.getMovies(viewModelScope, whenFail) { movies ->
+    fun getMovies(whenFailConnection: (message: String) -> Unit) {
+        repository.getMovies(viewModelScope, whenFailConnection) { movies ->
             _liveData.value = movies
         }
     }

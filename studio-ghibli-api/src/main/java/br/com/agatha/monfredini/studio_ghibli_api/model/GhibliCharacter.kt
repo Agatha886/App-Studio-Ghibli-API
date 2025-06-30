@@ -8,5 +8,5 @@ data class GhibliCharacter(
     val age: String,
     val hair_color: String,
     val eye_color: String,
-    var foto: Int
+    var photo: Int
 ) : Serializable

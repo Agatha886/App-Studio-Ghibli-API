@@ -14,5 +14,4 @@ object StringCommons {
     internal const val NO_VEHICLES_FOUND = "Oops! We couldn’t load any vehicles. Please check your connection and try again."
 
     internal const val NO_RESIDENTS_FOUND = "Oops! We couldn’t find any residents in this location. Please check your connection or try again later."
-
 }

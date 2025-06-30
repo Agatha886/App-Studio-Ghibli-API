@@ -13,7 +13,7 @@ import retrofit2.Call
 
 class CharactersRepository {
 
-    fun getGhibliCharacters(
+    fun getAllCharacters(
         viewModelScope: CoroutineScope,
         whenFailConnection: (mensage:String) -> Unit,
         getGhibliPeople: (people: List<GhibliCharacter>) -> Unit

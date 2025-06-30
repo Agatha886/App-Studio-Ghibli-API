@@ -14,8 +14,8 @@ class CharactersByMovieViewModel(private val repository: CharactersByMovieReposi
     private val _characterList = MutableLiveData<List<GhibliCharacter>>()
     val characterList: LiveData<List<GhibliCharacter>> = _characterList
 
-    fun getCharacterByMovie(movie: Movie, whenFail: (message:String) -> Unit) {
-        repository.getCharacterByMovie(viewModelScope, movie, whenFail) { characters ->
+    fun getCharacterByMovie(movie: Movie, whenFailConnection: (message:String) -> Unit) {
+        repository.getCharacterByMovie(viewModelScope, movie, whenFailConnection) { characters ->
             _characterList.value = characters
             logInfo("Characters = $characters")
         }

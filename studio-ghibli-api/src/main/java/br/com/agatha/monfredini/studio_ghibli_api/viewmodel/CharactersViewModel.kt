@@ -13,8 +13,8 @@ class CharactersViewModel(private val repository: CharactersRepository) : ViewMo
     private val _allCharacters = MutableLiveData<List<GhibliCharacter>>()
     val allCharacters: LiveData<List<GhibliCharacter>> = _allCharacters
 
-    fun getGhibliAllCharacters(whenFail: (mensage:String) -> Unit) {
-        repository.getGhibliCharacters(viewModelScope, whenFail) { characters ->
+    fun getAllCharacters(whenFailConnection: (mensage:String) -> Unit) {
+        repository.getAllCharacters(viewModelScope, whenFailConnection) { characters ->
             _allCharacters.value = characters
             logInfo("Ghibli All Characters = $characters")
         }
