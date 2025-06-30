@@ -27,7 +27,7 @@ class LocationsViewModel(private val repository: LocationsRepository) : ViewMode
     fun getResidents(location: Location, whenFailConnection: (message: String) -> Unit) {
         repository.getResidents(viewModelScope, location, whenFailConnection) { list ->
             _residentsLiveDate.value = list
-            logInfo("List Location characeters = $list")
+            logInfo("${location.name}'s Residents = $list")
         }
     }
 }
