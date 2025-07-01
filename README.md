@@ -84,8 +84,14 @@ Once added, you can access ViewModels and Repositories provided by the library d
 private val viewModel: MoviesViewModel by viewModel()
 ```
 
-You can then observe data and display it in your UI using LiveData or StateFlow.
+You can then observe data and display it in your UI using LiveData:
 
+```
+viewModel.movies.observe(this) { movies ->
+    adapter.submitList(movies)
+    logInfo("Movies: $movies")
+}
+```
 
 ## 📁 Project Structure
 
