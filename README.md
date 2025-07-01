@@ -27,6 +27,15 @@ dependencies {
 
 > Make sure to replace `v1.0.0` with the latest version tag available.
 
+### 3. Add Required Permissions to `AndroidManifest.xml`
+
+To allow API calls, include the following permissions in your manifest:
+
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+```
+
 ## ⚙️ Configuration
 
 To enable dependency injection using **Koin**, add the following to your `AndroidManifest.xml`:
@@ -54,26 +63,6 @@ class GhibliApplication : Application() {
 }
 ```
 
-### Available Koin Modules
-
-```kotlin
-val ghibliApiRepository = module {
-    single<MoviesRepository> { MoviesRepository() }
-    single<CharactersByMovieRepository> { CharactersByMovieRepository() }
-    single<CharactersRepository> { CharactersRepository() }
-    single<VehiclesRepository> { VehiclesRepository() }
-    single<LocationsRepository> { LocationsRepository() }
-}
-
-val ghibliApiViewModel = module {
-    viewModel<MoviesViewModel> { MoviesViewModel(get()) }
-    viewModel<CharactersByMovieViewModel> { CharactersByMovieViewModel(get()) }
-    viewModel<CharactersViewModel> { CharactersViewModel(get()) }
-    viewModel<VehiclesViewModel> { VehiclesViewModel(get()) }
-    viewModel<LocationsViewModel> { LocationsViewModel(get()) }
-}
-```
-
 ### Required Dependencies
 
 Make sure your project includes the following Koin libraries:
@@ -84,7 +73,8 @@ koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin"
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
 ```
 
-### How to Use
+
+## 📚 How to Use
 
 Once added, you can access ViewModels and Repositories provided by the library directly using Koin:
 
@@ -96,10 +86,11 @@ private val viewModel: MoviesViewModel by viewModel()
 
 You can then observe data and display it in your UI using LiveData or StateFlow.
 
+
 ## 📁 Project Structure
 
 * `studioghibli`: Reusable Android module that handles all API calls and data processing.
-* `app`: Example/demo module used only for local testing of the `studioghibli` module. You do not need this module in your own application.
+* `app`: Example/demo module used only for local testing of the `studioghibli` module. It includes UI screens to test the available API calls and ViewModels.
 
 ## 🚀 Features
 
@@ -120,12 +111,6 @@ You can explore endpoints like:
 * `/locations`
 * `/species`
 * `/vehicles`
-
-## ✅ License
-
-This project is open source and available under the [MIT License](LICENSE).
-
----
 
 ### Questions?
 
