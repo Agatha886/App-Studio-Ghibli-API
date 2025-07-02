@@ -10,4 +10,4 @@ data class Location(
     val terrain: String,
     val surface_water: String,
     @SerializedName("residents") val residentsUrl: List<String>
-) : Serializable
+) : Serializable, GhibliImage(name)

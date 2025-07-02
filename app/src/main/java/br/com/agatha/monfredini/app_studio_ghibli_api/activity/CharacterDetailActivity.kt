@@ -18,9 +18,9 @@ class CharacterDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val character = intent.getSerializableExtra("character") as? GhibliCharacter
-        logInfo("Character ${character?.name} = $character")
+        logInfo("Character ${character?.imageName} = $character")
         character?.let {
-            binding.etName.setText("Name : ${it.name}")
+            binding.etName.setText("Name : ${it.imageName}")
             binding.etGender.setText("Gender : ${it.gender}")
             binding.etAge.setText("Age : ${it.age}")
             binding.etHairColor.setText("Hair Color : ${it.hair_color}")

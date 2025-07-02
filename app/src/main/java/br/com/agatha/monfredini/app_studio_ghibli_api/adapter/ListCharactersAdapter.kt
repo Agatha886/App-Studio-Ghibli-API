@@ -15,7 +15,7 @@ class ListCharactersAdapter(
 
     inner class ListCharactersViewHolder(private val binding: ItemCharacterBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(character: GhibliCharacter) {
-            binding.nome.text = character.name
+            binding.nome.text = character.imageName
             binding.root.setOnClickListener { onClick(character) }
         }
     }
@@ -30,7 +30,7 @@ class ListCharactersAdapter(
     }
 
     class DiffCallback : DiffUtil.ItemCallback<GhibliCharacter>() {
-        override fun areItemsTheSame(oldItem: GhibliCharacter, newItem: GhibliCharacter) = oldItem.name == newItem.name
+        override fun areItemsTheSame(oldItem: GhibliCharacter, newItem: GhibliCharacter) = oldItem.imageName == newItem.imageName
         override fun areContentsTheSame(oldItem: GhibliCharacter, newItem: GhibliCharacter) = oldItem == newItem
     }
 }

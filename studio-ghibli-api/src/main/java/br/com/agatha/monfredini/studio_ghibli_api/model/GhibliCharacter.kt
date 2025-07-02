@@ -9,4 +9,4 @@ data class GhibliCharacter(
     val hair_color: String,
     val eye_color: String,
     var photo: Int
-) : Serializable
+) : Serializable, GhibliImage(name)

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.com.agatha.monfredini.app_studio_ghibli_api.databinding.ActivityCharacterDetailBinding
-import br.com.agatha.monfredini.studio_ghibli_api.commons.LogsStudioGhibliApi.logErro
 import br.com.agatha.monfredini.studio_ghibli_api.commons.LogsStudioGhibliApi.logInfo
 import br.com.agatha.monfredini.studio_ghibli_api.model.Location
 import br.com.agatha.monfredini.studio_ghibli_api.viewmodel.LocationsViewModel
@@ -22,16 +21,16 @@ class LocationDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val location = intent.getSerializableExtra("location") as? Location
-        logInfo("Location ${location?.name} = $location")
+        logInfo("Location ${location?.imageName} = $location")
         location?.let {
             viewModel.residentsLiveData.observe(this) { list ->
-                logInfo("Location ${location.name} Residents ${list}")
-                binding.etEyeColor.setText("First Residents : ${list[0]?.name}")
+                logInfo("Location ${location.imageName} Residents ${list}")
+                binding.etEyeColor.setText("First Residents : ${list[0]?.imageName}")
             }
             viewModel.getResidents(location) { message ->
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
             }
-            binding.etName.setText("Name : ${it.name}")
+            binding.etName.setText("Name : ${it.imageName}")
             binding.etGender.setText("Climate : ${it.climate}")
             binding.etAge.setText("Terrain : ${it.terrain}")
             binding.etHairColor.setText("Surface Water : ${it.surface_water}")

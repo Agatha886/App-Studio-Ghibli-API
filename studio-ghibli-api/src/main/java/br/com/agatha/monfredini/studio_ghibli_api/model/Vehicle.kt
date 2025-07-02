@@ -12,7 +12,7 @@ data class Vehicle(
     val length: String,
     @SerializedName("pilot") private val pilotUrl: String,
     var pilotCharacter: GhibliCharacter? = null
-) : Serializable {
+) : Serializable, GhibliImage(name) {
     val pilotId: String
         get() = pilotUrl.replace("$BASE_URL/people/", "")
 }

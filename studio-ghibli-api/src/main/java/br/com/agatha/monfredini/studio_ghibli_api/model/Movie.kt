@@ -6,7 +6,6 @@ data class Movie(
     val title: String,
     val description: String,
     val release_date: String,
-    var poster: Int,
     val people: List<String>,
     val species: List<String>,
-) : Serializable
+) : Serializable, GhibliImage(title)
