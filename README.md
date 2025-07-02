@@ -21,11 +21,11 @@ allprojects {
 
 ```groovy
 dependencies {
-    implementation 'com.github.Agatha886.App:studioghibli-v1.0.0'
+    implementation 'com.github.Agatha886.App:studioghibli-v1.0.1'
 }
 ```
 
-> Make sure to replace `v1.0.0` with the latest version tag available.
+> Make sure to replace `v1.0.1` with the latest version tag available.
 
 ### 3. Add Required Permissions to `AndroidManifest.xml`
 

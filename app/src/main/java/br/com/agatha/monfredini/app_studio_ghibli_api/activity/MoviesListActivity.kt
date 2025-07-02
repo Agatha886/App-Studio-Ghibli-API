@@ -22,7 +22,7 @@ class MoviesListActivity : AppCompatActivity() {
         binding = ActivityMovieListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        adapter = MoviesAdapter { movie ->
+        adapter = MoviesAdapter(this) { movie ->
             val intent = Intent(this, CharactersByMovieActivity::class.java)
             intent.putExtra("movie", movie)
             startActivity(intent)

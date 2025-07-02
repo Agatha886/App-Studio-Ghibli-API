@@ -22,7 +22,7 @@ class VehiclesDetailActivity : AppCompatActivity() {
         vehicle?.let {
             binding.etName.setText("Name : ${it.name}")
             binding.etGender.setText("Description: ${it.description}")
-            binding.etAge.setText("Class: ${it.vehicle_class}")
+            binding.etAge.setText("Class: ${it.vehicleClass}")
             binding.etHairColor.setText("Length: ${it.length}")
             binding.etEyeColor.setText("Pilot Name: ${it.pilotCharacter?.name}")
         }

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.com.agatha.monfredini.app_studio_ghibli_api.databinding.ActivityCharacterDetailBinding
-import br.com.agatha.monfredini.studio_ghibli_api.commons.LogsStudioGhibliApi.logErro
 import br.com.agatha.monfredini.studio_ghibli_api.commons.LogsStudioGhibliApi.logInfo
 import br.com.agatha.monfredini.studio_ghibli_api.model.Location
 import br.com.agatha.monfredini.studio_ghibli_api.viewmodel.LocationsViewModel
@@ -34,7 +33,7 @@ class LocationDetailActivity : AppCompatActivity() {
             binding.etName.setText("Name : ${it.name}")
             binding.etGender.setText("Climate : ${it.climate}")
             binding.etAge.setText("Terrain : ${it.terrain}")
-            binding.etHairColor.setText("Surface Water : ${it.surface_water}")
+            binding.etHairColor.setText("Surface Water : ${it.surfaceWater}")
         }
     }
 }

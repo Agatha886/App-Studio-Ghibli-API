@@ -44,7 +44,7 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "br.com.agatha.monfredini"
                 artifactId = "studio-ghibli-api"
-                version = "1.0.0"
+                version = "1.0.1"
             }
         }
     }
