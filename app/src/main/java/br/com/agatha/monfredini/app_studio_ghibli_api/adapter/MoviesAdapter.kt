@@ -25,7 +25,7 @@ class MoviesAdapter(
                 )
             )
             binding.title.text = movie.title
-            binding.year.text = movie.release_date
+            binding.year.text = movie.releaseDate
             binding.root.setOnClickListener { onClick(movie) }
         }
     }

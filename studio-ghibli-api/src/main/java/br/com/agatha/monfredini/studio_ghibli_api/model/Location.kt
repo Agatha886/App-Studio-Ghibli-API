@@ -8,7 +8,7 @@ data class Location(
     val name: String,
     val climate: String,
     val terrain: String,
-    val surface_water: String,
+    @SerializedName("surface_water") val surfaceWater: String,
     @SerializedName("residents") val residentsUrl: List<String>
 ) : Serializable {
     fun getImage(): GhibliImage = GhibliImage(name)

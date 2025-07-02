@@ -33,7 +33,7 @@ class LocationDetailActivity : AppCompatActivity() {
             binding.etName.setText("Name : ${it.name}")
             binding.etGender.setText("Climate : ${it.climate}")
             binding.etAge.setText("Terrain : ${it.terrain}")
-            binding.etHairColor.setText("Surface Water : ${it.surface_water}")
+            binding.etHairColor.setText("Surface Water : ${it.surfaceWater}")
         }
     }
 }

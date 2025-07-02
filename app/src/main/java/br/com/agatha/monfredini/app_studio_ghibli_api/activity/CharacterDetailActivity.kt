@@ -23,8 +23,8 @@ class CharacterDetailActivity : AppCompatActivity() {
             binding.etName.setText("Name : ${it.name}")
             binding.etGender.setText("Gender : ${it.gender}")
             binding.etAge.setText("Age : ${it.age}")
-            binding.etHairColor.setText("Hair Color : ${it.hair_color}")
-            binding.etEyeColor.setText("Eye Color : ${it.eye_color}")
+            binding.etHairColor.setText("Hair Color : ${it.hairColor}")
+            binding.etEyeColor.setText("Eye Color : ${it.eyeColor}")
         }
     }
 }
