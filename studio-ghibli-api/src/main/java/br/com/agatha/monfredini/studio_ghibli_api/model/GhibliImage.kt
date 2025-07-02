@@ -2,27 +2,38 @@ package br.com.agatha.monfredini.studio_ghibli_api.model
 
 import android.content.Context
 import android.content.res.Resources
-import java.util.Locale
+import br.com.agatha.monfredini.studio_ghibli_api.commons.StringCommons.IMAGE_IS_NOT_EMPTY
+import br.com.agatha.monfredini.studio_ghibli_api.commons.StringCommons.STRING_IS_EMPTY
 
-open class GhibliImage(val imageName: String) {
-    fun getImage(resources: Resources, contex: Context, imageDefault: Int): Int {
-        val searchByResources = searchByResources(resources, contex)
-        return if (searchByResources > 0) searchByResources else imageDefault
+open class GhibliImage(private var imageName: String) {
+
+    init {
+        require(imageName.isNotEmpty()) { IMAGE_IS_NOT_EMPTY }
     }
 
-    private fun searchByResources(resources: Resources, contex: Context): Int {
-        val imageName = getThumbnailName(imageName)
-        return resources.getIdentifier(
-            imageName, "drawable",
-            contex.packageName
-        )
+    fun getImageByDrawable(context: Context, imageDefault: Int): Int {
+        val resource = searchByString(context.resources, context)
+        return if (resource > 0) resource else imageDefault
     }
 
+    private fun searchByString(resources: Resources, context: Context): Int {
+        val name = getThumbnailName(imageName)
+        return if (name != STRING_IS_EMPTY) {
+            resources.getIdentifier(
+                name, "drawable",
+                context.packageName
+            )
+        } else 0
+    }
+
+//    IF string is Castle in the Sky RETURN castle_in_the_sky
     private fun getThumbnailName(string: String): String {
-        return string.toLowerCase(Locale.ROOT)
-            .replace(" ", "_")
-            .replace("'", "")
-            .replace("\\.", "")
-            .replace("-", "_")
+        return if (string.isNotEmpty()) {
+            string.lowercase()
+                .replace(" ", "_")
+                .replace("'", "")
+                .replace("\\.", "")
+                .replace("-", "_")
+        } else STRING_IS_EMPTY
     }
 }

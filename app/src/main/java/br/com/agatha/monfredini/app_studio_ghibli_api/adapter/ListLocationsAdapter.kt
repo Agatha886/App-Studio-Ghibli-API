@@ -16,7 +16,7 @@ class ListLocationsAdapter(
     inner class ListLocationsViewHolder(private val binding: ItemCharacterBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(location: Location) {
-            binding.nome.text = location.imageName
+            binding.nome.text = location.name
             binding.root.setOnClickListener { onClick(location) }
         }
     }
@@ -33,7 +33,7 @@ class ListLocationsAdapter(
 
     class DiffCallback : DiffUtil.ItemCallback<Location>() {
         override fun areItemsTheSame(oldItem: Location, newItem: Location) =
-            oldItem.imageName == newItem.imageName
+            oldItem.name == newItem.name
 
         override fun areContentsTheSame(oldItem: Location, newItem: Location) =
             oldItem == newItem

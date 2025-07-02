@@ -8,4 +8,6 @@ data class Movie(
     val release_date: String,
     val people: List<String>,
     val species: List<String>,
-) : Serializable, GhibliImage(title)
+) : Serializable {
+    fun getImage(): GhibliImage = GhibliImage(title)
+}

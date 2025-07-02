@@ -21,16 +21,16 @@ class LocationDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val location = intent.getSerializableExtra("location") as? Location
-        logInfo("Location ${location?.imageName} = $location")
+        logInfo("Location ${location?.name} = $location")
         location?.let {
             viewModel.residentsLiveData.observe(this) { list ->
-                logInfo("Location ${location.imageName} Residents ${list}")
-                binding.etEyeColor.setText("First Residents : ${list[0]?.imageName}")
+                logInfo("Location ${location.name} Residents ${list}")
+                binding.etEyeColor.setText("First Residents : ${list[0]?.name}")
             }
             viewModel.getResidents(location) { message ->
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
             }
-            binding.etName.setText("Name : ${it.imageName}")
+            binding.etName.setText("Name : ${it.name}")
             binding.etGender.setText("Climate : ${it.climate}")
             binding.etAge.setText("Terrain : ${it.terrain}")
             binding.etHairColor.setText("Surface Water : ${it.surface_water}")

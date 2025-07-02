@@ -14,4 +14,8 @@ object StringCommons {
     internal const val NO_VEHICLES_FOUND = "Oops! We couldn’t load any vehicles. Please check your connection and try again."
 
     internal const val NO_RESIDENTS_FOUND = "Oops! We couldn’t find any residents in this location. Please check your connection or try again later."
+
+    internal const val IMAGE_IS_NOT_EMPTY = "TAG_STUDIO_GHIBLI_ERRO - imageName cannot be null or empty"
+
+    internal const val STRING_IS_EMPTY = "STRING_IS_EMPTY"
 }
