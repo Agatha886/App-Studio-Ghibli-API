@@ -83,7 +83,13 @@ Once added, you can access ViewModels and Repositories provided by the library d
 ```kotlin
 private val viewModel: MoviesViewModel by viewModel()
 ```
+### Example: Calling getMovies()
 
+```kotlin
+viewModel.getMovies { message ->
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+}
+```
 You can then observe data and display it in your UI using LiveData:
 
 ```
@@ -96,8 +102,8 @@ viewModel.movies.observe(this) { movies ->
 ## 📁 Project Structure
 
 * `studioghibli`: Reusable Android module that handles all API calls and data processing.
-* `app`: Example/demo module used only for local testing of the `studioghibli` module. It includes UI screens to test the available API calls and ViewModels.
-
+* `app`: Example/demo module used only for local testing of the `studioghibli` module. It includes UI screens to test the available API calls and ViewModels. It also contains a folder `res/drawable/images` with static images of Studio Ghibli movies used for demonstration purposes
+  
 ## 🚀 Features
 
 * Consume Studio Ghibli movie, character, location, species, and vehicle data.
