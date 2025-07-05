@@ -102,7 +102,7 @@ viewModel.movies.observe(this) { movies ->
 ## 📁 Project Structure
 
 * `studioghibli`: Reusable Android module that handles all API calls and data processing.
-* `app`: Example/demo module used only for local testing of the `studioghibli` module. It includes UI screens to test the available API calls and ViewModels. It also contains a folder `res/drawable/images` with static images of Studio Ghibli movies used for demonstration purposes
+* `app`: Example/demo module used only for local testing of the `studioghibli` module. It includes UI screens to test the available API calls and ViewModels. It also contains a folder `res/drawable` with static images of Studio Ghibli movies used for demonstration purposes
   
 ## 🚀 Features
 
