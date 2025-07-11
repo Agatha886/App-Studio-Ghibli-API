@@ -19,7 +19,7 @@ class MoviesAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: Movie) {
             binding.image.setBackgroundResource(
-                movie.getImage().getImageByDrawable(
+                movie.getImageDrawable().getImageByDrawable(
                     context,
                     R.drawable.no_image
                 )
